@@ -8,36 +8,31 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import * as SharedStyle from '../../shared-style';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import * as SharedStyle from "../../shared-style";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
-var STYLE = {
-  borderTop: '1px solid #222',
-  borderBottom: '1px solid #48494E',
-  userSelect: 'none'
-};
+var STYLE = {};
 var STYLE_TITLE = {
-  fontSize: '11px',
-  color: SharedStyle.PRIMARY_COLOR.text_alt,
-  padding: '5px 15px 8px 15px',
-  backgroundColor: SharedStyle.PRIMARY_COLOR.alt,
-  textShadow: '-1px -1px 2px rgba(0, 0, 0, 1)',
-  boxShadow: 'inset 0px -3px 19px 0px rgba(0,0,0,0.5)',
-  margin: '0px',
-  cursor: 'pointer'
+  fontSize: "11px",
+  color: "black",
+  padding: "5px 15px 8px 15px",
+  backgroundColor: "rgba(246, 246, 246)",
+  borderTopLeftRadius: "15px",
+  borderTopRightRadius: "15px",
+  margin: "0px"
 };
 var STYLE_CONTENT = {
-  fontSize: '11px',
-  color: SharedStyle.PRIMARY_COLOR.text_alt,
-  border: '1px solid #222',
-  padding: '0px',
-  backgroundColor: SharedStyle.PRIMARY_COLOR.alt,
-  textShadow: '-1px -1px 2px rgba(0, 0, 0, 1)'
+  fontSize: "11px",
+  color: "black",
+  borderBottomLeftRadius: "15px",
+  borderBottomRightRadius: "15px",
+  padding: "0px",
+  backgroundColor: "rgba(246, 246, 246)"
 };
 var STYLE_ARROW = {
-  float: 'right'
+  float: "right"
 };
 
 var Panel = function (_Component) {
@@ -49,24 +44,24 @@ var Panel = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props, context));
 
     _this.state = {
-      opened: props.hasOwnProperty('opened') ? props.opened : false,
+      opened: props.hasOwnProperty("opened") ? props.opened : false,
       hover: false
     };
     return _this;
   }
 
   _createClass(Panel, [{
-    key: 'toggleOpen',
+    key: "toggleOpen",
     value: function toggleOpen() {
       this.setState({ opened: !this.state.opened });
     }
   }, {
-    key: 'toggleHover',
+    key: "toggleHover",
     value: function toggleHover() {
       this.setState({ hover: !this.state.hover });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
@@ -80,12 +75,30 @@ var Panel = function (_Component) {
 
 
       return React.createElement(
-        'div',
+        "div",
         { style: STYLE },
         React.createElement(
-          'h3',
+          "h3",
+          { style: STYLE_TITLE },
+          name,
+          headComponents
+        ),
+        React.createElement(
+          "div",
+          { style: STYLE_CONTENT },
+          children
+        )
+      );
+
+      return React.createElement(
+        "div",
+        { style: STYLE },
+        React.createElement(
+          "h3",
           {
-            style: _extends({}, STYLE_TITLE, { color: hover ? SharedStyle.SECONDARY_COLOR.main : SharedStyle.PRIMARY_COLOR.text_alt }),
+            style: _extends({}, STYLE_TITLE, {
+              color: hover ? SharedStyle.SECONDARY_COLOR.main : SharedStyle.PRIMARY_COLOR.text_alt
+            }),
             onMouseEnter: function onMouseEnter() {
               return _this2.toggleHover();
             },
@@ -101,8 +114,8 @@ var Panel = function (_Component) {
           opened ? React.createElement(FaAngleUp, { style: STYLE_ARROW }) : React.createElement(FaAngleDown, { style: STYLE_ARROW })
         ),
         React.createElement(
-          'div',
-          { style: _extends({}, STYLE_CONTENT, { display: opened ? 'block' : 'none' }) },
+          "div",
+          { style: _extends({}, STYLE_CONTENT, { display: opened ? "block" : "none" }) },
           children
         )
       );

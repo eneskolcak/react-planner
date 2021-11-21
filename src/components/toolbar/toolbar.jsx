@@ -218,7 +218,8 @@ export default class Toolbar extends Component {
           display: "flex",
           flexDirection: "column",
           backgroundColor: "rgba(246, 246, 246)",
-          width: "40%",
+          minWidth: width,
+          width: width,
           padding: 15,
         }}
       >

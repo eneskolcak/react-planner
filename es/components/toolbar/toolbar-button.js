@@ -6,53 +6,53 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import * as SharedStyle from '../../shared-style';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import * as SharedStyle from "../../shared-style";
 
 //http://www.cssportal.com/css-tooltip-generator/
 
 var STYLE = {
-  width: '30px',
-  height: '30px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginBottom: '5px',
-  fontSize: '25px',
-  position: 'relative',
-  cursor: 'pointer'
+  width: "30px",
+  height: "30px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: "5px",
+  fontSize: "25px",
+  position: "relative",
+  cursor: "pointer"
 };
 
 var STYLE_TOOLTIP = {
-  position: 'absolute',
-  width: '140px',
+  position: "absolute",
+  width: "140px",
   color: SharedStyle.COLORS.white,
   background: SharedStyle.COLORS.black,
-  height: '30px',
-  lineHeight: '30px',
-  textAlign: 'center',
-  visibility: 'visible',
-  borderRadius: '6px',
-  opacity: '0.8',
-  left: '100%',
-  top: '50%',
-  marginTop: '-15px',
-  marginLeft: '15px',
-  zIndex: '999',
-  fontSize: '12px'
+  height: "30px",
+  lineHeight: "30px",
+  textAlign: "center",
+  visibility: "visible",
+  borderRadius: "6px",
+  opacity: "0.8",
+  left: "100%",
+  top: "50%",
+  marginTop: "-15px",
+  marginLeft: "15px",
+  zIndex: "999",
+  fontSize: "12px"
 };
 
 var STYLE_TOOLTIP_PIN = {
-  position: 'absolute',
-  top: '50%',
-  right: '100%',
-  marginTop: '-8px',
-  width: '0',
-  height: '0',
-  borderRight: '8px solid #000000',
-  borderTop: '8px solid transparent',
-  borderBottom: '8px solid transparent'
+  position: "absolute",
+  top: "50%",
+  right: "100%",
+  marginTop: "-8px",
+  width: "0",
+  height: "0",
+  borderRight: "8px solid #000000",
+  borderTop: "8px solid transparent",
+  borderBottom: "8px solid transparent"
 };
 
 var ToolbarButton = function (_Component) {
@@ -68,36 +68,69 @@ var ToolbarButton = function (_Component) {
   }
 
   _createClass(ToolbarButton, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       var state = this.state,
           props = this.props;
+      var name = props.name;
 
       var color = props.active || state.active ? SharedStyle.SECONDARY_COLOR.icon : SharedStyle.PRIMARY_COLOR.icon;
 
-      return React.createElement(
-        'div',
-        { style: STYLE,
+      if (name) return React.createElement(
+        "div",
+        {
+          onClick: props.onClick,
           onMouseOver: function onMouseOver(event) {
             return _this2.setState({ active: true });
           },
           onMouseOut: function onMouseOut(event) {
             return _this2.setState({ active: false });
-          } },
+          },
+          style: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "between",
+            flexDirection: "row",
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            marginBottom: "10px",
+            paddingTop: "10px",
+            paddingBottom: "10px",
+            borderRadius: 15,
+            cursor: "pointer",
+            backgroundColor: "white"
+          }
+        },
         React.createElement(
-          'div',
-          { style: { color: color }, onClick: props.onClick },
+          "i",
+          {
+            style: {
+              backgroundColor: "black",
+              width: "40px",
+              height: "40px",
+              borderRadius: "100%",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "10px"
+            }
+          },
           props.children
         ),
-        state.active ? React.createElement(
-          'div',
-          { style: STYLE_TOOLTIP },
-          React.createElement('span', { style: STYLE_TOOLTIP_PIN }),
-          props.tooltip
-        ) : null
-      );
+        React.createElement(
+          "p",
+          {
+            className: "text-base font-bold",
+            style: {
+              fontWeight: 500
+            }
+          },
+          name
+        )
+      );else return React.createElement("div", null);
     }
   }]);
 

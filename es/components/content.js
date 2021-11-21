@@ -1,20 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Viewer2D from './viewer2d/viewer2d';
-import Viewer3D from './viewer3d/viewer3d';
-import Viewer3DFirstPerson from './viewer3d/viewer3d-first-person';
-import CatalogList from './catalog-view/catalog-list';
-import ProjectConfigurator from './configurator/project-configurator';
+import React from "react";
+import PropTypes from "prop-types";
+import Viewer2D from "./viewer2d/viewer2d";
+import Viewer3D from "./viewer3d/viewer3d";
+import Viewer3DFirstPerson from "./viewer3d/viewer3d-first-person";
+import CatalogList from "./catalog-view/catalog-list";
+import ProjectConfigurator from "./configurator/project-configurator";
 
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 export default function Content(_ref) {
   var width = _ref.width,
       height = _ref.height,
+      viewOnly = _ref.viewOnly,
       state = _ref.state,
       customContents = _ref.customContents;
 
-  var mode = state.get('mode');
+  var mode = state.get("mode");
 
   switch (mode) {
     case constants.MODE_3D_VIEW:
@@ -39,7 +40,12 @@ export default function Content(_ref) {
     case constants.MODE_DRAWING_ITEM:
     case constants.MODE_DRAGGING_HOLE:
     case constants.MODE_ROTATING_ITEM:
-      return React.createElement(Viewer2D, { state: state, width: width, height: height });
+      return React.createElement(Viewer2D, {
+        state: state,
+        width: width,
+        height: height,
+        viewOnly: viewOnly
+      });
 
     case constants.MODE_CONFIGURING_PROJECT:
       return React.createElement(ProjectConfigurator, { width: width, height: height, state: state });
@@ -49,7 +55,7 @@ export default function Content(_ref) {
         var CustomContent = customContents[mode];
         return React.createElement(CustomContent, { width: width, height: height, state: state });
       } else {
-        throw new Error('Mode ' + mode + ' doesn\'t have a mapped content');
+        throw new Error("Mode " + mode + " doesn't have a mapped content");
       }
   }
 }
