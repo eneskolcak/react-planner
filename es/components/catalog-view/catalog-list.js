@@ -301,103 +301,74 @@ var CatalogList = (function (_Component) {
           );
         });
 
-        return (
-          <div style={{ ...containerStyle, ...this.props.style }}>
-            <div
-              style={{
-                display: "flex",
-                margin: "auto",
-                flexDirection: "column",
-                width: 450,
-                height: "100%",
-              }}
-            >
-              <div
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "5px",
-                  paddingTop: 5,
-                  paddingBottom: 5,
-                }}
-              >
-                <h5
-                  className="text-2xl font-bold font-manrope text-secondary"
-                  style={{
-                    fontSize: 25,
-                    padding: 0,
-                    margin: 0,
-                  }}
-                >
-                  Eşyalar
-                </h5>
-                <button
-                  className="flex justify-center w-8 min-w-11 min-h-11 h-11 bg-ghost-default text-primary1"
-                  style={{
-                    borderRadius: "100%",
-                    height: 45,
-                    width: 45,
-                    border: 0,
-                    backgroundColor: "#8E43E7",
-                    color: "white",
-                    fontSize: 20,
-                  }}
-                >
-                  <span className="text-primary1">
-                    <IconNext />
-                  </span>
-                </button>
-              </div>
-              <div
-                style={{
-                  marginBottom: "auto",
-                  marginTop: 20,
-                }}
-              >
-                <input
-                  className={
-                    "relative block w-full p-4 text-base font-medium bg-white border-black border-solid text-primary-default border-primary border-default font-manrope focus:outline-none rounded rounded-12 "
-                  }
-                  onChange={(e) => {
-                    this.matcharray(e.target.value);
-                  }}
-                  style={{
-                    width: "100%",
-                    padding: 5,
-                    paddingBottom: 10,
-                    paddingTop: 10,
-                    borderRadius: 5,
-                    border: "1px solid #CCCCCC",
-                  }}
-                />
-              </div>
-
-              {/* selectedHistory.size ? (
-                <div style={historyContainer}>
-                  <span>{this.context.translator.t("Last Selected")}</span>
-                  {selectedHistoryElements}
-                </div>
-              ) : null */}
-              <div style={itemsStyle}>
-                {this.state.matchString === ""
-                  ? [
-                      turnBackButton,
-                      Object.values(this.state.categories).map((category) => {
-                        return category.elements.map((elem, i) => {
-                          return <CatalogItem key={elem.name} element={elem} />;
-                        });
-                      }),
-                      elementsToDisplay.map((elem) => {
-                        return <CatalogItem key={elem.name} element={elem} />;
-                      }),
-                    ]
-                  : this.state.matchedElements.map((elem) => (
-                      <CatalogItem key={elem.name} element={elem} />
-                    ))}
-              </div>
-            </div>
-          </div>
+        return React.createElement(
+          ContentContainer,
+          {
+            width: this.props.width,
+            height: this.props.height,
+            style: _extends({}, containerStyle, this.props.style),
+          },
+          React.createElement(
+            ContentTitle,
+            null,
+            this.context.translator.t("Catalog")
+          ),
+          breadcrumbComponent,
+          React.createElement(
+            "div",
+            { style: searchContainer },
+            React.createElement(
+              "span",
+              { style: searchText },
+              this.context.translator.t("Search Element")
+            ),
+            React.createElement("input", {
+              type: "text",
+              style: searchInput,
+              onChange: function onChange(e) {
+                _this2.matcharray(e.target.value);
+              },
+            })
+          ),
+          selectedHistory.size
+            ? React.createElement(
+                "div",
+                { style: historyContainer },
+                React.createElement(
+                  "span",
+                  null,
+                  this.context.translator.t("Last Selected")
+                ),
+                selectedHistoryElements
+              )
+            : null,
+          React.createElement(
+            "div",
+            { style: itemsStyle },
+            this.state.matchString === ""
+              ? [
+                  turnBackButton,
+                  categoriesToDisplay.map(function (cat) {
+                    return React.createElement(CatalogPageItem, {
+                      key: cat.name,
+                      page: cat,
+                      oldPage: currentCategory,
+                    });
+                  }),
+                  elementsToDisplay.map(function (elem) {
+                    return React.createElement(CatalogItem, {
+                      key: elem.name,
+                      element: elem,
+                    });
+                  }),
+                ]
+              : this.state.matchedElements.map(function (elem) {
+                  return React.createElement(CatalogItem, {
+                    key: elem.name,
+                    element: elem,
+                  });
+                })
+          )
         );
       },
     },
