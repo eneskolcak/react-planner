@@ -97,7 +97,10 @@ var ReactPlanner = function (_Component) {
           viewOnly = _props2.viewOnly,
           props = _objectWithoutProperties(_props2, ["width", "height", "state", "stateExtractor", "viewOnly"]);
 
-      var contentW = !viewOnly ? width - toolbarW : width;
+      //let contentW = !viewOnly ? width - toolbarW : width;
+
+
+      var contentW = width;
       var toolbarH = height;
       var contentH = height;
       var sidebarH = height;
@@ -107,11 +110,6 @@ var ReactPlanner = function (_Component) {
       return React.createElement(
         "div",
         { style: _extends({}, wrapperStyle, { height: height }) },
-        !viewOnly && React.createElement(Toolbar, _extends({
-          width: toolbarW,
-          height: toolbarH,
-          state: extractedState
-        }, props)),
         React.createElement(Content, _extends({
           width: contentW,
           height: contentH,
