@@ -57,7 +57,8 @@ class ReactPlanner extends Component {
     let { width, height, state, stateExtractor, viewOnly, ...props } =
       this.props;
 
-    let contentW = !viewOnly ? width - toolbarW : width;
+    //let contentW = !viewOnly ? width - toolbarW : width;
+    let contentW = width;
     let toolbarH = height;
     let contentH = height;
     let sidebarH = height;
@@ -66,14 +67,14 @@ class ReactPlanner extends Component {
 
     return (
       <div style={{ ...wrapperStyle, height }}>
-        {!viewOnly && (
+        {/* 
           <Toolbar
             width={toolbarW}
-            height={toolbarH}
+            height={toolbarH} 
             state={extractedState}
             {...props}
           />
-        )}
+        )*/}
 
         <Content
           width={contentW}
