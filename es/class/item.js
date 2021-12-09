@@ -123,12 +123,10 @@ var Item = (function () {
     {
       key: "selectToolDrawingItem",
       value: function selectToolDrawingItem(state, sceneComponentType) {
-        console.log("WORK DRAWING ITEM");
         const newItem = new Map({
           type: sceneComponentType,
         });
-        console.log(newItem);
-        newItem.properties.text = "SELAM";
+
         state = state.merge({
           mode: MODE_DRAWING_ITEM,
           drawingSupport: newItem,
