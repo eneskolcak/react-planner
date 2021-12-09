@@ -112,7 +112,6 @@ export default class CatalogItem extends Component {
 
   select() {
     let element = this.props.element;
-
     switch (element.prototype) {
       case "lines":
         this.context.linesActions.selectToolDrawingLine(element.name);

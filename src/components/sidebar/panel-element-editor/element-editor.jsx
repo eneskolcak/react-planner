@@ -413,6 +413,8 @@ export default class ElementEditor extends Component {
         return data.get("currentValue");
       });
 
+      console.log(properties);
+
       this.context.projectActions.setProperties(properties);
     }
 

@@ -40,6 +40,7 @@ class ReactPlanner extends Component {
   componentWillMount() {
     let { store } = this.context;
     let { projectActions, catalog, stateExtractor, plugins } = this.props;
+
     plugins.forEach((plugin) => plugin(store, stateExtractor));
     projectActions.initCatalog(catalog);
   }
@@ -47,6 +48,7 @@ class ReactPlanner extends Component {
   componentWillReceiveProps(nextProps) {
     let { stateExtractor, state, projectActions, catalog } = nextProps;
     let plannerState = stateExtractor(state);
+
     let catalogReady = plannerState.getIn(["catalog", "ready"]);
     if (!catalogReady) {
       projectActions.initCatalog(catalog);
@@ -67,14 +69,12 @@ class ReactPlanner extends Component {
 
     return (
       <div style={{ ...wrapperStyle, height }}>
-        {/* 
-          <Toolbar
-            width={toolbarW}
-            height={toolbarH} 
-            state={extractedState}
-            {...props}
-          />
-        )*/}
+        {/*<Toolbar
+          width={toolbarW}
+          height={toolbarH}
+          state={extractedState}
+          {...props}
+        />*/}
 
         <Content
           width={contentW}
@@ -84,6 +84,8 @@ class ReactPlanner extends Component {
           {...props}
           onWheel={(event) => event.preventDefault()}
         />
+        {/*
+
         <Sidebar
           width={sidebarW}
           height={sidebarH}
@@ -91,7 +93,6 @@ class ReactPlanner extends Component {
           {...props}
         />
 
-        {/*
         <FooterBar
           width={width}
           height={footerBarH}

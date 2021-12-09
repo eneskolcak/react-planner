@@ -87,14 +87,14 @@ export default function Sidebar({
           layers={state.scene.layers}
         />
       ),
-    }, */
+    }, 
     {
       index: 4,
       condition: !multiselected,
       dom: <PanelElementEditor state={state} />,
     },
     //{ index: 5, condition: multiselected, dom: <PanelMultiElementsEditor state={state} /> },
-    /*{
+    {
       index: 6,
       condition: !!selectedGroup,
       dom: (
