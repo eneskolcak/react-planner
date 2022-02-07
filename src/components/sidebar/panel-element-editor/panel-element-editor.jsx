@@ -52,22 +52,25 @@ export default function PanelElementEditor(
   )
     return null;
 
-  let componentRenderer = (element, layer) => (
-    <Panel
-      key={element.id}
-      name={translator.t("Properties: [{0}] {1}", element.type, element.id)}
-      opened={true}
-    >
-      <div style={{ padding: "5px 15px" }}>
-        <ElementEditor
-          viewOnly={viewOnly}
-          element={element}
-          layer={layer}
-          state={state}
-        />
-      </div>
-    </Panel>
-  );
+  let componentRenderer = (element, layer) => {
+    if (element.type === "wall")
+      return (
+        <Panel
+          key={element.id}
+          name={translator.t("Properties: [{0}] {1}", element.type, element.id)}
+          opened={true}
+        >
+          <div style={{ padding: "5px 15px" }}>
+            <ElementEditor
+              viewOnly={viewOnly}
+              element={element}
+              layer={layer}
+              state={state}
+            />
+          </div>
+        </Panel>
+      );
+  };
 
   let layerRenderer = (layer) =>
     Seq()

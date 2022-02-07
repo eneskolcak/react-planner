@@ -538,14 +538,17 @@ export default function Viewer2D(
         width={width}
         height={height}
         value={viewer2D.isEmpty() ? null : viewer2D.toJS()}
-        onChangeValue={onChangeValue}
+        onChangeValue={(value) => {
+          console.log("CHANGE VALUE");
+          console.log(value);
+          onChangeValue(value);
+        }}
         tool={mode2Tool(mode)}
         onChangeTool={onChangeTool}
         detectAutoPan={mode2DetectAutopan(mode)}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
-        customToolbar={customToolBar}
         miniaturePosition="none"
         toolbarPosition="top"
       >

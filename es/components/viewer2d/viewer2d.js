@@ -289,7 +289,7 @@ export default function Viewer2D(_ref, _ref2) {
     event.stopPropagation();
   };
 
-  var onChangeValue = function onChangeValue(value) {
+  var _onChangeValue = function _onChangeValue(value) {
     projectActions.updateZoomScale(value.a);
     return viewer2DActions.updateCameraView(value);
   };
@@ -524,14 +524,17 @@ export default function Viewer2D(_ref, _ref2) {
         width: width,
         height: height,
         value: viewer2D.isEmpty() ? null : viewer2D.toJS(),
-        onChangeValue: onChangeValue,
+        onChangeValue: function onChangeValue(value) {
+          console.log("CHANGE VALUE");
+          console.log(value);
+          _onChangeValue(value);
+        },
         tool: mode2Tool(mode),
         onChangeTool: onChangeTool,
         detectAutoPan: mode2DetectAutopan(mode),
         onMouseDown: onMouseDown,
         onMouseMove: onMouseMove,
         onMouseUp: onMouseUp,
-        customToolbar: customToolBar,
         miniaturePosition: "none",
         toolbarPosition: "top"
       },

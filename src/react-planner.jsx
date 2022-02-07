@@ -84,7 +84,6 @@ class ReactPlanner extends Component {
           {...props}
           onWheel={(event) => event.preventDefault()}
         />
-        {/*
 
         <Sidebar
           width={sidebarW}
@@ -93,13 +92,12 @@ class ReactPlanner extends Component {
           {...props}
         />
 
-        <FooterBar
+        {/* <FooterBar
           width={width}
           height={footerBarH}
           state={extractedState}
           {...props}
-        />
-        */}
+        /> */}
       </div>
     );
   }

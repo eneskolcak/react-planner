@@ -121,7 +121,12 @@ var ReactPlanner = function (_Component) {
           onWheel: function onWheel(event) {
             return event.preventDefault();
           }
-        }))
+        })),
+        React.createElement(Sidebar, _extends({
+          width: sidebarW,
+          height: sidebarH,
+          state: extractedState
+        }, props))
       );
     }
   }]);
