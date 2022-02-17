@@ -548,6 +548,7 @@ export default function Viewer2D(
         detectAutoPan={mode2DetectAutopan(mode)}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
+        customToolbar={customToolBar}
         onMouseUp={onMouseUp}
         miniaturePosition="none"
         toolbarPosition="top"
