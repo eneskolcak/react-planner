@@ -49,10 +49,7 @@ export default class Panel extends Component {
 
     return (
       <div style={STYLE}>
-        <h3 style={STYLE_TITLE}>
-          {name}
-          {headComponents}
-        </h3>
+        <h3 style={STYLE_TITLE}>{name.toUpperCase()}</h3>
         <div style={STYLE_CONTENT}>{children}</div>
       </div>
     );

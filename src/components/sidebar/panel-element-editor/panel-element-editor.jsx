@@ -53,13 +53,13 @@ export default function PanelElementEditor(
     return null;
 
   let componentRenderer = (element, layer) => {
-    if (element.type === "wall")
+    if (
+      element.type === "wall" ||
+      element.type === "square column" ||
+      element.type === "round column"
+    )
       return (
-        <Panel
-          key={element.id}
-          name={translator.t("Properties: [{0}] {1}", element.type, element.id)}
-          opened={true}
-        >
+        <Panel key={element.id} name={element.type} opened={true}>
           <div style={{ padding: "5px 15px" }}>
             <ElementEditor
               viewOnly={viewOnly}

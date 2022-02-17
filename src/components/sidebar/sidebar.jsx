@@ -12,6 +12,7 @@ import If from "../../utils/react-if";
 
 const STYLE = {
   backgroundColor: SharedStyle.PRIMARY_COLOR.main,
+  width: 200,
   display: "block",
   overflowY: "auto",
   overflowX: "hidden",
@@ -129,8 +130,8 @@ export default function Sidebar({
         ...STYLE,
         backgroundColor: "transparent",
         position: "absolute",
-        right: 10,
-        top: 150,
+        right: 5,
+        bottom: 5,
       }}
       onKeyDown={(event) => event.stopPropagation()}
       onKeyUp={(event) => event.stopPropagation()}

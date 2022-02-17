@@ -80,8 +80,7 @@ var Panel = function (_Component) {
         React.createElement(
           "h3",
           { style: STYLE_TITLE },
-          name,
-          headComponents
+          name.toUpperCase()
         ),
         React.createElement(
           "div",
