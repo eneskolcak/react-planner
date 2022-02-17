@@ -539,8 +539,6 @@ export default function Viewer2D(
         height={height}
         value={viewer2D.isEmpty() ? null : viewer2D.toJS()}
         onChangeValue={(value) => {
-          console.log("CHANGE VALUE");
-          console.log(value);
           onChangeValue(value);
         }}
         tool={mode2Tool(mode)}
