@@ -370,7 +370,7 @@ export default function Viewer2D(
           top: 15,
           padding: 15,
           color: "rgba(128, 128, 128, 1)",
-          left: 20,
+          right: 20,
           borderRadius: 15,
           paddingLeft: 35,
           paddingRight: 35,
@@ -462,7 +462,33 @@ export default function Viewer2D(
             justifyContent: "center",
             cursor: "pointer",
           }}
-          onClick={() => {}}
+          onClick={() => {
+            props.onChangeValue({
+              SVGHeight: height,
+              SVGWidth: width,
+              a: 0.215,
+              b: 0,
+              c: 0,
+              d: 0.215,
+              e: 0,
+              endX: null,
+              endY: null,
+              f: 0,
+              focus: false,
+              lastAction: null,
+              miniatureOpen: true,
+              mode: "idle",
+              pinchPointDistance: null,
+              prePinchMode: null,
+              scaleFactorMax: undefined,
+              scaleFactorMin: undefined,
+              startX: null,
+              startY: null,
+              version: 2,
+              viewerHeight: width,
+              viewerWidth: height,
+            });
+          }}
         >
           <MdFullscreen />
         </label>
