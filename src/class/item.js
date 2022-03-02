@@ -133,11 +133,14 @@ class Item {
     let catalog = state.catalog;
     state = this.updateDrawingItem(state, layerID, x, y, catalog).updatedState;
     state = Layer.unselectAll(state, layerID).updatedState;
+
     state = state.merge({
       drawingSupport: Map({
         type: state.drawingSupport.get("type"),
       }),
     });
+
+    this.unselect(state, layerID, state.drawingSupport.get("currentID"));
 
     return { updatedState: state };
   }

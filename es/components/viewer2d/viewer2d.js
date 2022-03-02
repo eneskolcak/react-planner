@@ -263,6 +263,9 @@ export default function Viewer2D(_ref, _ref2) {
 
       case constants.MODE_DRAWING_ITEM:
         itemsActions.endDrawingItem(layerID, x, y);
+
+        projectActions.rollback();
+
         break;
 
       case constants.MODE_DRAGGING_LINE:
@@ -340,15 +343,13 @@ export default function Viewer2D(_ref, _ref2) {
           position: "absolute",
           display: "flex",
           border: "1px solid rgba(204, 204, 204, 1)",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "space-around",
           top: 15,
           padding: 15,
           color: "rgba(128, 128, 128, 1)",
-          right: 20,
-          borderRadius: 15,
-          paddingLeft: 35,
-          paddingRight: 35
+          left: 20,
+          borderRadius: 15
         }
       },
       !viewOnly && React.createElement(
@@ -360,7 +361,6 @@ export default function Viewer2D(_ref, _ref2) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor: props.tool === "auto" ? "rgba(142, 67, 231, 1)" : "white",
@@ -381,7 +381,6 @@ export default function Viewer2D(_ref, _ref2) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor: props.tool === TOOL_PAN ? "rgba(142, 67, 231, 1)" : "white",
@@ -402,7 +401,6 @@ export default function Viewer2D(_ref, _ref2) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor: props.tool === TOOL_ZOOM_IN ? "rgba(142, 67, 231, 1)" : "white",
@@ -423,7 +421,6 @@ export default function Viewer2D(_ref, _ref2) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor: props.tool === TOOL_ZOOM_OUT ? "rgba(142, 67, 231, 1)" : "white",

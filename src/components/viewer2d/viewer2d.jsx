@@ -293,6 +293,9 @@ export default function Viewer2D(
 
       case constants.MODE_DRAWING_ITEM:
         itemsActions.endDrawingItem(layerID, x, y);
+
+        projectActions.rollback();
+
         break;
 
       case constants.MODE_DRAGGING_LINE:
@@ -365,15 +368,13 @@ export default function Viewer2D(
           position: "absolute",
           display: "flex",
           border: "1px solid rgba(204, 204, 204, 1)",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "space-around",
           top: 15,
           padding: 15,
           color: "rgba(128, 128, 128, 1)",
-          right: 20,
+          left: 20,
           borderRadius: 15,
-          paddingLeft: 35,
-          paddingRight: 35,
         }}
       >
         {!viewOnly && (
@@ -384,7 +385,6 @@ export default function Viewer2D(
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              marginRight: 25,
               cursor: "pointer",
               borderRadius: 5,
               backgroundColor:
@@ -404,7 +404,6 @@ export default function Viewer2D(
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor:
@@ -422,7 +421,6 @@ export default function Viewer2D(
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor:
@@ -441,7 +439,6 @@ export default function Viewer2D(
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            marginRight: 25,
             cursor: "pointer",
             borderRadius: 5,
             backgroundColor:
