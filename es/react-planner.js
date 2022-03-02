@@ -112,11 +112,6 @@ var ReactPlanner = function (_Component) {
       return React.createElement(
         "div",
         { style: _extends({}, wrapperStyle, { height: height }) },
-        React.createElement(Toolbar, _extends({
-          width: toolbarW,
-          height: toolbarH,
-          state: extractedState
-        }, props)),
         React.createElement(Content, _extends({
           width: contentW,
           height: contentH,

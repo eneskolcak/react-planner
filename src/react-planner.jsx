@@ -69,12 +69,12 @@ class ReactPlanner extends Component {
 
     return (
       <div style={{ ...wrapperStyle, height }}>
-        <Toolbar
+        {/* <Toolbar
           width={toolbarW}
           height={toolbarH}
           state={extractedState}
           {...props}
-        />
+        /> */}
 
         <Content
           width={contentW}
