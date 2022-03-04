@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -10,6 +12,7 @@ import { GiArrowCursor } from "react-icons/gi";
 import { FaRegHandPointer } from "react-icons/fa";
 import { FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { MdFullscreen } from "react-icons/md";
+import { scale, transform, translate, fromObject } from "transformation-matrix";
 
 function mode2Tool(mode) {
   switch (mode) {
@@ -292,9 +295,19 @@ export default function Viewer2D(_ref, _ref2) {
     event.stopPropagation();
   };
 
-  var _onChangeValue = function _onChangeValue(value) {
+  var onChangeValue = function onChangeValue(value) {
     projectActions.updateZoomScale(value.a);
     return viewer2DActions.updateCameraView(value);
+  };
+
+  var isZoomLevelGoingOutOfBounds = function isZoomLevelGoingOutOfBounds(value, scaleFactor) {
+    var _decompose = decompose(value),
+        curScaleFactor = _decompose.scaleFactor;
+
+    var lessThanScaleFactorMin = value.scaleFactorMin && curScaleFactor * scaleFactor < value.scaleFactorMin;
+    var moreThanScaleFactorMax = value.scaleFactorMax && curScaleFactor * scaleFactor > value.scaleFactorMax;
+
+    return lessThanScaleFactorMin && scaleFactor < 1 || moreThanScaleFactorMax && scaleFactor > 1;
   };
 
   var onChangeTool = function onChangeTool(tool) {
@@ -315,6 +328,146 @@ export default function Viewer2D(_ref, _ref2) {
         viewer2DActions.selectToolZoomOut();
         break;
     }
+  };
+
+  var limitZoomLevel = function limitZoomLevel(value, matrix) {
+    var scaleLevel = matrix.a;
+
+    if (value.scaleFactorMin != null) {
+      // limit minimum zoom
+      scaleLevel = Math.max(scaleLevel, value.scaleFactorMin);
+    }
+
+    if (value.scaleFactorMax != null) {
+      // limit maximum zoom
+      scaleLevel = Math.min(scaleLevel, value.scaleFactorMax);
+    }
+
+    return set(matrix, {
+      a: scaleLevel,
+      d: scaleLevel
+    });
+  };
+
+  var set = function set(value, patch) {
+    var action = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+    value = Object.assign({}, value, patch, { lastAction: action });
+    return Object.freeze(value);
+  };
+
+  var decompose = function decompose(value) {
+    var matrix = fromObject(value);
+
+    return {
+      scaleFactor: matrix.a,
+      translationX: matrix.e,
+      translationY: matrix.f
+    };
+  };
+
+  var fitToViewer = function fitToViewer(value) {
+    var SVGAlignX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "ALIGN_COVER";
+    var SVGAlignY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "ALIGN_COVER";
+    var viewerWidth = value.viewerWidth,
+        viewerHeight = value.viewerHeight,
+        SVGMinX = value.SVGMinX,
+        SVGMinY = value.SVGMinY,
+        SVGWidth = value.SVGWidth,
+        SVGHeight = value.SVGHeight;
+
+
+    var scaleX = viewerWidth / SVGWidth;
+    var scaleY = viewerHeight / SVGHeight;
+    var scaleLevel = Math.min(scaleX, scaleY);
+
+    var scaleMatrix = scale(scaleLevel, scaleLevel);
+
+    var translateX = -SVGMinX * scaleX;
+    var translateY = -SVGMinY * scaleY;
+
+    // after fitting, SVG and the viewer will match in width (1) or in height (2) or SVG will cover the container with preserving aspect ratio (0)
+    if (scaleX < scaleY) {
+      var remainderY = viewerHeight - scaleX * SVGHeight;
+
+      //(1) match in width, meaning scaled SVGHeight <= viewerHeight
+      switch (SVGAlignY) {
+        case "ALIGN_TOP":
+          translateY = -SVGMinY * scaleLevel;
+          break;
+
+        case "ALIGN_CENTER":
+          translateY = Math.round(remainderY / 2) - SVGMinY * scaleLevel;
+          break;
+
+        case "ALIGN_BOTTOM":
+          translateY = remainderY - SVGMinY * scaleLevel;
+          break;
+
+        case "ALIGN_COVER":
+          scaleMatrix = scale(scaleY, scaleY); // (0) we must now match to short edge, in this case - height
+          var remainderX = viewerWidth - scaleY * SVGWidth; // calculate remainder in the other scale
+
+          translateX = SVGMinX + Math.round(remainderX / 2); // center by the long edge
+          break;
+
+        default:
+        //no op
+      }
+    } else {
+      var _remainderX = viewerWidth - scaleY * SVGWidth;
+
+      //(2) match in height, meaning scaled SVGWidth <= viewerWidth
+      switch (SVGAlignX) {
+        case "ALIGN_LEFT":
+          translateX = -SVGMinX * scaleLevel;
+          break;
+
+        case "ALIGN_CENTER":
+          translateX = Math.round(_remainderX / 2) - SVGMinX * scaleLevel;
+          break;
+
+        case "ALIGN_RIGHT":
+          translateX = _remainderX - SVGMinX * scaleLevel;
+          break;
+
+        case "ALIGN_COVER":
+          scaleMatrix = scale(scaleX, scaleX); // (0) we must now match to short edge, in this case - width
+          var _remainderY = viewerHeight - scaleX * SVGHeight; // calculate remainder in the other scale
+
+          translateY = SVGMinY + Math.round(_remainderY / 2); // center by the long edge
+          break;
+
+        default:
+        //no op
+      }
+    }
+
+    var translationMatrix = translate(translateX, translateY);
+
+    var matrix = transform(translationMatrix, //2
+    scaleMatrix //1
+    );
+
+    if (isZoomLevelGoingOutOfBounds(value, scaleLevel / value.d)) {
+      // Do not allow scale and translation
+      return set(value, {
+        mode: "MODE_IDLE",
+        startX: null,
+        startY: null,
+        endX: null,
+        endY: null
+      });
+    }
+
+    return set(value, _extends({
+      mode: "MODE_IDLE"
+    }, limitZoomLevel(value, matrix), {
+      startX: null,
+      startY: null,
+      endX: null,
+      endY: null
+    }), "ACTION_ZOOM");
   };
 
   var _state$get$toJS = state.get("viewer2D").toJS(),
@@ -444,31 +597,9 @@ export default function Viewer2D(_ref, _ref2) {
             cursor: "pointer"
           },
           onClick: function onClick() {
-            props.onChangeValue({
-              SVGHeight: height,
-              SVGWidth: width,
-              a: 0.215,
-              b: 0,
-              c: 0,
-              d: 0.215,
-              e: 0,
-              endX: null,
-              endY: null,
-              f: 0,
-              focus: false,
-              lastAction: null,
-              miniatureOpen: true,
-              mode: "idle",
-              pinchPointDistance: null,
-              prePinchMode: null,
-              scaleFactorMax: undefined,
-              scaleFactorMin: undefined,
-              startX: null,
-              startY: null,
-              version: 2,
-              viewerHeight: width,
-              viewerWidth: height
-            });
+            var newValue = fitToViewer(props.value);
+
+            props.onChangeValue(_extends({}, newValue, { e: 0, f: 0 }));
           }
         },
         React.createElement(MdFullscreen, null)
@@ -548,7 +679,9 @@ export default function Viewer2D(_ref, _ref2) {
         height: height,
         value: viewer2D.isEmpty() ? null : viewer2D.toJS(),
         onChangeValue: function onChangeValue(value) {
-          _onChangeValue(value);
+          console.log("FIT TO VIEWER");
+          console.log(value);
+          // onChangeValue(value);
         },
         tool: mode2Tool(mode),
         onChangeTool: onChangeTool,

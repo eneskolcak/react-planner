@@ -5731,6 +5731,11 @@
   "resolved" "https://registry.npmjs.org/transformation-matrix/-/transformation-matrix-1.15.3.tgz"
   "version" "1.15.3"
 
+"transformation-matrix@^2.11.1":
+  "integrity" "sha512-srlkTrmetYwTBJ1RHdukkwJ8S8D+2JjgSb1DbvmTwj+DsIpCpRYHbWgOXe/Ql2rX37WqlKLIgidpYlHPGsrwgA=="
+  "resolved" "https://registry.npmjs.org/transformation-matrix/-/transformation-matrix-2.11.1.tgz"
+  "version" "2.11.1"
+
 "trim-repeated@^1.0.0":
   "integrity" "sha1-42RqLqTokTEr9+rObPsFOAvAHCE="
   "resolved" "https://registry.npmjs.org/trim-repeated/-/trim-repeated-1.0.0.tgz"
