@@ -1,6 +1,6 @@
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { ReactSVGPanZoom, TOOL_NONE, TOOL_PAN, TOOL_ZOOM_IN, TOOL_ZOOM_OUT, TOOL_AUTO } from "react-svg-pan-zoom";
@@ -501,7 +501,7 @@ export default function Viewer2D(_ref, _ref2) {
           top: 15,
           padding: 15,
           color: "rgba(128, 128, 128, 1)",
-          left: 20,
+          right: 20,
           borderRadius: 15
         }
       },

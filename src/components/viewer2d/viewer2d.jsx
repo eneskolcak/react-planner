@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import {
@@ -529,7 +529,7 @@ export default function Viewer2D(
           top: 15,
           padding: 15,
           color: "rgba(128, 128, 128, 1)",
-          left: 20,
+          right: 20,
           borderRadius: 15,
         }}
       >
