@@ -12,7 +12,7 @@ import Grids from "./grids/grids";
 import Group from "./group";
 import RulerX from "./rulerX";
 import RulerY from "./rulerY";
-import fitToViewer from "./fitToViewer";
+import { fitToViewer } from "./fitToViewer";
 
 export { Viewer2D, Vertex, State, Snap, Scene, Ruler, Line, Layer, Item, Area, Grids, Group, RulerX, RulerY, fitToViewer };
 
