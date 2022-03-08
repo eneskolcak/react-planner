@@ -38,7 +38,7 @@ var decompose = function decompose(value) {
   };
 };
 
-var fitToViewer = function fitToViewer(value) {
+export var fitToViewer = function fitToViewer(value) {
   var SVGAlignX = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "ALIGN_COVER";
   var SVGAlignY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "ALIGN_COVER";
   var viewerWidth = value.viewerWidth,
@@ -115,6 +115,16 @@ var fitToViewer = function fitToViewer(value) {
     }
   }
 
+  var isZoomLevelGoingOutOfBounds = function isZoomLevelGoingOutOfBounds(value, scaleFactor) {
+    var _decompose = decompose(value),
+        curScaleFactor = _decompose.scaleFactor;
+
+    var lessThanScaleFactorMin = value.scaleFactorMin && curScaleFactor * scaleFactor < value.scaleFactorMin;
+    var moreThanScaleFactorMax = value.scaleFactorMax && curScaleFactor * scaleFactor > value.scaleFactorMax;
+
+    return lessThanScaleFactorMin && scaleFactor < 1 || moreThanScaleFactorMax && scaleFactor > 1;
+  };
+
   var translationMatrix = translate(translateX, translateY);
 
   var matrix = transform(translationMatrix, //2
@@ -141,5 +151,3 @@ var fitToViewer = function fitToViewer(value) {
     endY: null
   }), "ACTION_ZOOM");
 };
-
-export default fitToViewer;

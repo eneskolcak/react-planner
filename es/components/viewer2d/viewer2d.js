@@ -12,7 +12,7 @@ import { GiArrowCursor } from "react-icons/gi";
 import { FaRegHandPointer } from "react-icons/fa";
 import { FiZoomIn, FiZoomOut } from "react-icons/fi";
 import { MdFullscreen } from "react-icons/md";
-import fitToViewer from "./fitToViewer";
+import { fitToViewer } from "./fitToViewer";
 
 function mode2Tool(mode) {
   switch (mode) {
@@ -295,19 +295,9 @@ export default function Viewer2D(_ref, _ref2) {
     event.stopPropagation();
   };
 
-  var onChangeValue = function onChangeValue(value) {
+  var _onChangeValue = function _onChangeValue(value) {
     projectActions.updateZoomScale(value.a);
     return viewer2DActions.updateCameraView(value);
-  };
-
-  var isZoomLevelGoingOutOfBounds = function isZoomLevelGoingOutOfBounds(value, scaleFactor) {
-    var _decompose = decompose(value),
-        curScaleFactor = _decompose.scaleFactor;
-
-    var lessThanScaleFactorMin = value.scaleFactorMin && curScaleFactor * scaleFactor < value.scaleFactorMin;
-    var moreThanScaleFactorMax = value.scaleFactorMax && curScaleFactor * scaleFactor > value.scaleFactorMax;
-
-    return lessThanScaleFactorMin && scaleFactor < 1 || moreThanScaleFactorMax && scaleFactor > 1;
   };
 
   var onChangeTool = function onChangeTool(tool) {
@@ -539,9 +529,7 @@ export default function Viewer2D(_ref, _ref2) {
         height: height,
         value: viewer2D.isEmpty() ? null : viewer2D.toJS(),
         onChangeValue: function onChangeValue(value) {
-          console.log("FIT TO VIEWER");
-          console.log(value);
-          // onChangeValue(value);
+          _onChangeValue(value);
         },
         tool: mode2Tool(mode),
         onChangeTool: onChangeTool,

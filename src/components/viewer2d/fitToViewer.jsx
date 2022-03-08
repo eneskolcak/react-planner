@@ -34,7 +34,7 @@ const decompose = (value) => {
   };
 };
 
-const fitToViewer = (
+export const fitToViewer = (
   value,
   SVGAlignX = "ALIGN_COVER",
   SVGAlignY = "ALIGN_COVER"
@@ -108,6 +108,21 @@ const fitToViewer = (
     }
   }
 
+  const isZoomLevelGoingOutOfBounds = (value, scaleFactor) => {
+    const { scaleFactor: curScaleFactor } = decompose(value);
+    const lessThanScaleFactorMin =
+      value.scaleFactorMin &&
+      curScaleFactor * scaleFactor < value.scaleFactorMin;
+    const moreThanScaleFactorMax =
+      value.scaleFactorMax &&
+      curScaleFactor * scaleFactor > value.scaleFactorMax;
+
+    return (
+      (lessThanScaleFactorMin && scaleFactor < 1) ||
+      (moreThanScaleFactorMax && scaleFactor > 1)
+    );
+  };
+
   const translationMatrix = translate(translateX, translateY);
 
   const matrix = transform(
@@ -139,5 +154,3 @@ const fitToViewer = (
     "ACTION_ZOOM"
   );
 };
-
-export default fitToViewer;
