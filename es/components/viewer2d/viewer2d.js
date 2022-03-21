@@ -300,6 +300,16 @@ export default function Viewer2D(_ref, _ref2) {
     return viewer2DActions.updateCameraView(value);
   };
 
+  useEffect(function () {
+    var newValue = fitToViewer({
+      SVGHeight: state.toJS().scene.height,
+      SVGWidth: state.toJS().scene.width,
+      viewerHeight: height,
+      viewerWidth: width
+    });
+    _onChangeValue(_extends({}, newValue, { e: 0, f: 0 }));
+  }, []);
+
   var onChangeTool = function onChangeTool(tool) {
     switch (tool) {
       case TOOL_NONE:
@@ -448,7 +458,6 @@ export default function Viewer2D(_ref, _ref2) {
           },
           onClick: function onClick() {
             var newValue = fitToViewer(props.value);
-
             props.onChangeValue(_extends({}, newValue, { e: 0, f: 0 }));
           }
         },

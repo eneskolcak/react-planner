@@ -328,6 +328,16 @@ export default function Viewer2D(
     return viewer2DActions.updateCameraView(value);
   };
 
+  useEffect(() => {
+    let newValue = fitToViewer({
+      SVGHeight: state.toJS().scene.height,
+      SVGWidth: state.toJS().scene.width,
+      viewerHeight: height,
+      viewerWidth: width,
+    });
+    onChangeValue({ ...newValue, e: 0, f: 0 });
+  }, []);
+
   let onChangeTool = (tool) => {
     switch (tool) {
       case TOOL_NONE:
@@ -462,7 +472,6 @@ export default function Viewer2D(
           }}
           onClick={() => {
             let newValue = fitToViewer(props.value);
-
             props.onChangeValue({ ...newValue, e: 0, f: 0 });
           }}
         >
