@@ -316,7 +316,7 @@ var Layer = function () {
     value: function setPropertiesByItemID(state, layerID, itemID, properties) {
       //let item = state.getIn(["scene", "layers", layerID, "items", itemID]);
 
-      Item.updateProperties(state, layerID, itemID, properties);
+      state = Item.updateProperties(state, layerID, itemID, properties).updatedState;
 
       return { updatedState: state };
     }
