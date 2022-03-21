@@ -244,6 +244,14 @@ class Item {
   }
 
   static setProperties(state, layerID, itemID, properties) {
+    console.log("SET PROPERTIES WORKS");
+    console.log({
+      state,
+      layerID,
+      itemID,
+      properties,
+    });
+
     state = state.mergeIn(
       ["scene", "layers", layerID, "items", itemID, "properties"],
       properties
