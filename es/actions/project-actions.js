@@ -52,7 +52,7 @@ export function unselectAll() {
   };
 }
 
-export function setPropertiesByItemID(itemId, properties) {
+export function setPropertiesByItemID(itemID, properties) {
   return {
     type: SET_PROPERTIES_BY_ITEMID,
     itemID: itemID,
