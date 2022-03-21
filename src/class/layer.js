@@ -441,6 +441,14 @@ class Layer {
     return { updatedState: state };
   }
 
+  static setPropertiesByItemID(state, layerID, itemID, properties) {
+    //let item = state.getIn(["scene", "layers", layerID, "items", itemID]);
+
+    Item.updateProperties(state, layerID, itemID, properties);
+
+    return { updatedState: state };
+  }
+
   static updatePropertiesOnSelected(state, layerID, properties) {
     let selected = state.getIn(["scene", "layers", layerID, "selected"]);
 
