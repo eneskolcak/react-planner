@@ -70,7 +70,7 @@ export default function (state, action) {
       return Project.setPropertiesByItemId(
         state,
         state.getIn(["scene", "selectedLayer"]),
-        action.itemId,
+        action.itemID,
         action.properties
       ).updatedState;
 

@@ -30,7 +30,7 @@ export default function (state, action) {
       state = state.merge({
         sceneHistory: history.historyPush(state.sceneHistory, state.scene)
       });
-      return Project.setPropertiesByItemId(state, state.getIn(["scene", "selectedLayer"]), action.itemId, action.properties).updatedState;
+      return Project.setPropertiesByItemId(state, state.getIn(["scene", "selectedLayer"]), action.itemID, action.properties).updatedState;
 
     case SET_PROPERTIES:
       state = state.merge({
