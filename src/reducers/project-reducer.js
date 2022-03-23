@@ -67,6 +67,11 @@ export default function (state, action) {
       state = state.merge({
         sceneHistory: history.historyPush(state.sceneHistory, state.scene),
       });
+
+      console.log("PROJECT JS ARRIVED");
+      console.log("ACTION " + action);
+      console.log("ITEM ID " + action.itemID);
+      console.log("LAYER ID " + action.properties);
       return Project.setPropertiesByItemId(
         state,
         state.getIn(["scene", "selectedLayer"]),
