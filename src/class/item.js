@@ -261,6 +261,7 @@ class Item {
   }
 
   static setJsProperties(state, layerID, itemID, properties) {
+    console.log("SET JS PROPERTIES works EXECUTED");
     return this.setProperties(state, layerID, itemID, fromJS(properties));
   }
 

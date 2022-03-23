@@ -1,4 +1,4 @@
-import { SELECT_ITEM, SELECT_TOOL_DRAWING_ITEM, UPDATE_DRAWING_ITEM, END_DRAWING_ITEM, BEGIN_DRAGGING_ITEM, UPDATE_DRAGGING_ITEM, END_DRAGGING_ITEM, BEGIN_ROTATING_ITEM, UPDATE_ROTATING_ITEM, END_ROTATING_ITEM } from '../constants';
+import { SELECT_ITEM, SELECT_TOOL_DRAWING_ITEM, UPDATE_DRAWING_ITEM, END_DRAWING_ITEM, BEGIN_DRAGGING_ITEM, UPDATE_DRAGGING_ITEM, END_DRAGGING_ITEM, BEGIN_ROTATING_ITEM, UPDATE_ROTATING_ITEM, END_ROTATING_ITEM, UPDATE_ITEM } from "../constants";
 
 export function selectItem(layerID, itemID) {
   return {
@@ -18,55 +18,81 @@ export function selectToolDrawingItem(sceneComponentType) {
 export function updateDrawingItem(layerID, x, y) {
   return {
     type: UPDATE_DRAWING_ITEM,
-    layerID: layerID, x: x, y: y
+    layerID: layerID,
+    x: x,
+    y: y
   };
 }
 
 export function endDrawingItem(layerID, x, y) {
   return {
     type: END_DRAWING_ITEM,
-    layerID: layerID, x: x, y: y
+    layerID: layerID,
+    x: x,
+    y: y
   };
 }
 
 export function beginDraggingItem(layerID, itemID, x, y) {
   return {
     type: BEGIN_DRAGGING_ITEM,
-    layerID: layerID, itemID: itemID, x: x, y: y
+    layerID: layerID,
+    itemID: itemID,
+    x: x,
+    y: y
+  };
+}
+
+export function updateItem(layerID, itemID, properties) {
+  console.log("ITEM ACTIONS");
+  console.log("ITEM ID " + itemID);
+  console.log("LAYER ID " + properties);
+  return {
+    type: UPDATE_ITEM,
+    layerID: layerID,
+    itemID: itemID,
+    properties: properties
   };
 }
 
 export function updateDraggingItem(x, y) {
   return {
     type: UPDATE_DRAGGING_ITEM,
-    x: x, y: y
+    x: x,
+    y: y
   };
 }
 
 export function endDraggingItem(x, y) {
   return {
     type: END_DRAGGING_ITEM,
-    x: x, y: y
+    x: x,
+    y: y
   };
 }
 
 export function beginRotatingItem(layerID, itemID, x, y) {
   return {
     type: BEGIN_ROTATING_ITEM,
-    layerID: layerID, itemID: itemID, x: x, y: y
+    layerID: layerID,
+    itemID: itemID,
+    x: x,
+    y: y
   };
 }
 
 export function updateRotatingItem(x, y) {
   return {
     type: UPDATE_ROTATING_ITEM,
-    x: x, y: y
+    x: x,
+    y: y
   };
 }
 
 export function endRotatingItem(x, y) {
   return {
     type: END_ROTATING_ITEM,
-    x: x, y: y
+    x: x,
+    y: y
   };
 }

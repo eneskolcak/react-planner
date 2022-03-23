@@ -52,6 +52,7 @@ var Project = function () {
       console.log("PROJECT JS ARRIVED");
       console.log("ITEM ID " + itemID);
       console.log("LAYER ID " + layerID);
+
       state = Layer.setPropertiesByItemID(state, layerID, itemID, properties).updatedState;
 
       return { updatedState: state };
