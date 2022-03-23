@@ -315,10 +315,10 @@ var Layer = function () {
     key: "setPropertiesByItemID",
     value: function setPropertiesByItemID(state, layerID, itemID, properties) {
       var item = state.getIn(["scene", "layers", layerID, "items", itemID]);
-
-      selected.items.forEach(function (itemID) {
-        return state = Item.updateProperties(state, layerID, itemID, properties).updatedState;
-      });
+      console.log("ITEM UPDATE ARRIVED");
+      console.log("ITEM ID " + itemID);
+      console.log("LAYER ID " + layerID);
+      state = Item.updateProperties(state, layerID, itemID, properties).updatedState;
 
       return { updatedState: state };
     }
