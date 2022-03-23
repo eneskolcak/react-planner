@@ -3,7 +3,6 @@ import { UPDATE_2D_CAMERA, SELECT_TOOL_PAN, SELECT_TOOL_ZOOM_IN, SELECT_TOOL_ZOO
 export default function (state, action) {
   switch (action.type) {
     case UPDATE_2D_CAMERA:
-      console.log(action.value);
       return state.merge({ viewer2D: action.value });
 
     case SELECT_TOOL_PAN:

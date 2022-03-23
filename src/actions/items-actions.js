@@ -9,7 +9,6 @@ import {
   BEGIN_ROTATING_ITEM,
   UPDATE_ROTATING_ITEM,
   END_ROTATING_ITEM,
-  UPDATE_ITEM,
 } from "../constants";
 
 export function selectItem(layerID, itemID) {
@@ -52,18 +51,6 @@ export function beginDraggingItem(layerID, itemID, x, y) {
     itemID,
     x,
     y,
-  };
-}
-
-export function updateItem(layerID, itemID, properties) {
-  console.log("ITEM ACTIONS");
-  console.log("ITEM ID " + itemID);
-  console.log("LAYER ID " + properties);
-  return {
-    type: UPDATE_ITEM,
-    layerID,
-    itemID,
-    properties,
   };
 }
 

@@ -1,4 +1,4 @@
-import { SELECT_ITEM, SELECT_TOOL_DRAWING_ITEM, UPDATE_DRAWING_ITEM, END_DRAWING_ITEM, BEGIN_DRAGGING_ITEM, UPDATE_DRAGGING_ITEM, END_DRAGGING_ITEM, BEGIN_ROTATING_ITEM, UPDATE_ROTATING_ITEM, END_ROTATING_ITEM, UPDATE_ITEM } from "../constants";
+import { SELECT_ITEM, SELECT_TOOL_DRAWING_ITEM, UPDATE_DRAWING_ITEM, END_DRAWING_ITEM, BEGIN_DRAGGING_ITEM, UPDATE_DRAGGING_ITEM, END_DRAGGING_ITEM, BEGIN_ROTATING_ITEM, UPDATE_ROTATING_ITEM, END_ROTATING_ITEM } from "../constants";
 
 export function selectItem(layerID, itemID) {
   return {
@@ -40,18 +40,6 @@ export function beginDraggingItem(layerID, itemID, x, y) {
     itemID: itemID,
     x: x,
     y: y
-  };
-}
-
-export function updateItem(layerID, itemID, properties) {
-  console.log("ITEM ACTIONS");
-  console.log("ITEM ID " + itemID);
-  console.log("LAYER ID " + properties);
-  return {
-    type: UPDATE_ITEM,
-    layerID: layerID,
-    itemID: itemID,
-    properties: properties
   };
 }
 

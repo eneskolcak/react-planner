@@ -49,10 +49,6 @@ var Project = function () {
   }, {
     key: "setPropertiesByItemId",
     value: function setPropertiesByItemId(state, layerID, itemID, properties) {
-      console.log("PROJECT JS ARRIVED");
-      console.log("ITEM ID " + itemID);
-      console.log("LAYER ID " + layerID);
-
       state = Layer.setPropertiesByItemID(state, layerID, itemID, properties).updatedState;
 
       return { updatedState: state };
@@ -315,8 +311,6 @@ var Project = function () {
   }, {
     key: "addCircularGuide",
     value: function addCircularGuide(state, x, y, radius) {
-      console.log("adding horizontal guide at", x, y, radius);
-
       return { updatedState: state };
     }
   }, {
@@ -336,8 +330,6 @@ var Project = function () {
   }, {
     key: "removeCircularGuide",
     value: function removeCircularGuide(state, guideID) {
-      console.log("removeing horizontal guide ", guideID);
-
       return { updatedState: state };
     }
   }]);

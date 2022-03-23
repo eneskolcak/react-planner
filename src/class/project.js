@@ -50,10 +50,6 @@ class Project {
   }
 
   static setPropertiesByItemId(state, layerID, itemID, properties) {
-    console.log("PROJECT JS ARRIVED");
-    console.log("ITEM ID " + itemID);
-    console.log("LAYER ID " + layerID);
-
     state = Layer.setPropertiesByItemID(
       state,
       layerID,
@@ -318,8 +314,6 @@ class Project {
   }
 
   static addCircularGuide(state, x, y, radius) {
-    console.log("adding horizontal guide at", x, y, radius);
-
     return { updatedState: state };
   }
 
@@ -336,8 +330,6 @@ class Project {
   }
 
   static removeCircularGuide(state, guideID) {
-    console.log("removeing horizontal guide ", guideID);
-
     return { updatedState: state };
   }
 }

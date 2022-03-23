@@ -53,9 +53,6 @@ export function unselectAll() {
 }
 
 export function setPropertiesByItemID(itemID, properties) {
-  console.log("ACTION FILE");
-  console.log("ITEM ID " + itemID);
-  console.log("PROPERTIES " + properties);
   return {
     type: SET_PROPERTIES_BY_ITEMID,
     itemID: itemID,

@@ -227,14 +227,6 @@ var Item = function () {
   }, {
     key: "setProperties",
     value: function setProperties(state, layerID, itemID, properties) {
-      console.log("SET PROPERTIES WORKS");
-      console.log({
-        state: state,
-        layerID: layerID,
-        itemID: itemID,
-        properties: properties
-      });
-
       state = state.mergeIn(["scene", "layers", layerID, "items", itemID, "properties"], properties);
 
       return { updatedState: state };
@@ -242,7 +234,6 @@ var Item = function () {
   }, {
     key: "setJsProperties",
     value: function setJsProperties(state, layerID, itemID, properties) {
-      console.log("SET JS PROPERTIES works EXECUTED");
       return this.setProperties(state, layerID, itemID, fromJS(properties));
     }
   }, {

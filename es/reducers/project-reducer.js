@@ -31,10 +31,6 @@ export default function (state, action) {
         sceneHistory: history.historyPush(state.sceneHistory, state.scene)
       });
 
-      console.log("PROJECT JS ARRIVED");
-      console.log("ACTION " + action);
-      console.log("ITEM ID " + action.itemID);
-      console.log("LAYER ID " + action.properties);
       return Project.setPropertiesByItemId(state, state.getIn(["scene", "selectedLayer"]), action.itemID, action.properties).updatedState;
 
     case SET_PROPERTIES:

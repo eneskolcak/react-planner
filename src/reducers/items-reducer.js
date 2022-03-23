@@ -37,19 +37,6 @@ export default function (state, action) {
       return Item.endDrawingItem(state, action.layerID, action.x, action.y)
         .updatedState;
 
-    case UPDATE_ITEM:
-    case BEGIN_DRAGGING_ITEM:
-      state = state.merge({
-        sceneHistory: history.historyPush(state.sceneHistory, state.scene),
-      });
-      console.log("SET JS PROPERTIES EXECUTED");
-      return Item.setJsProperties(
-        state,
-        action.layerID,
-        action.itemID,
-        action.properties
-      ).updatedState;
-
     case BEGIN_DRAGGING_ITEM:
       state = state.merge({
         sceneHistory: history.historyPush(state.sceneHistory, state.scene),
