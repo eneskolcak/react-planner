@@ -314,9 +314,11 @@ var Layer = function () {
   }, {
     key: "setPropertiesByItemID",
     value: function setPropertiesByItemID(state, layerID, itemID, properties) {
-      //let item = state.getIn(["scene", "layers", layerID, "items", itemID]);
+      var item = state.getIn(["scene", "layers", layerID, "items", itemID]);
 
-      state = Item.setProperties(state, layerID, itemID, properties).updatedState;
+      selected.items.forEach(function (itemID) {
+        return state = Item.updateProperties(state, layerID, itemID, properties).updatedState;
+      });
 
       return { updatedState: state };
     }
