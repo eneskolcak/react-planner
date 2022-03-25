@@ -56,8 +56,15 @@ class ReactPlanner extends Component {
   }
 
   render() {
-    let { width, height, state, stateExtractor, viewOnly, ...props } =
-      this.props;
+    let {
+      width,
+      height,
+      state,
+      stateExtractor,
+      viewOnly,
+      onClickOnItem,
+      ...props
+    } = this.props;
 
     //let contentW = !viewOnly ? width - toolbarW : width;
     let contentW = width;
@@ -81,6 +88,7 @@ class ReactPlanner extends Component {
           height={contentH}
           state={extractedState}
           viewOnly={viewOnly}
+          onClickOnItem={onClickOnItem}
           {...props}
           onWheel={(event) => event.preventDefault()}
         />

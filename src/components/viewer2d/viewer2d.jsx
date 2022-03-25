@@ -106,7 +106,7 @@ function extractElementData(node) {
 }
 
 export default function Viewer2D(
-  { state, width, height, viewOnly },
+  { state, width, height, viewOnly, onClickOnItem },
   {
     viewer2DActions,
     linesActions,
@@ -262,28 +262,32 @@ export default function Viewer2D(
         if (viewOnly) {
           projectActions.unselectAll();
         }
-        if (!viewOnly) {
-          switch (elementData ? elementData.prototype : "none") {
-            case "areas":
+
+        switch (elementData ? elementData.prototype : "none") {
+          case "areas":
+            if (!viewOnly)
               areaActions.selectArea(elementData.layer, elementData.id);
-              break;
+            break;
 
-            case "lines":
+          case "lines":
+            if (!viewOnly)
               linesActions.selectLine(elementData.layer, elementData.id);
-              break;
+            break;
 
-            case "holes":
+          case "holes":
+            if (!viewOnly)
               holesActions.selectHole(elementData.layer, elementData.id);
-              break;
+            break;
 
-            case "items":
+          case "items":
+            if (!viewOnly)
               itemsActions.selectItem(elementData.layer, elementData.id);
-              break;
+            else onClickOnItem(elementData.id);
+            break;
 
-            case "none":
-              projectActions.unselectAll();
-              break;
-          }
+          case "none":
+            projectActions.unselectAll();
+            break;
         }
 
         break;

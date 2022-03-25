@@ -86,6 +86,8 @@ ReactDOM.render(
           catalog={MyCatalog}
           width={width}
           height={height}
+          viewOnly={true}
+          onClickOnItem={(id) => console.log(id)}
           plugins={plugins}
           toolbarButtons={toolbarButtons}
           stateExtractor={(state) => state.get("react-planner")}

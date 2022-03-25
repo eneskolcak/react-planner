@@ -13,7 +13,8 @@ export default function Content(_ref) {
       height = _ref.height,
       viewOnly = _ref.viewOnly,
       state = _ref.state,
-      customContents = _ref.customContents;
+      customContents = _ref.customContents,
+      onClickOnItem = _ref.onClickOnItem;
 
   var mode = state.get("mode");
 
@@ -44,6 +45,7 @@ export default function Content(_ref) {
         state: state,
         width: width,
         height: height,
+        onClickOnItem: onClickOnItem,
         viewOnly: viewOnly
       });
 
