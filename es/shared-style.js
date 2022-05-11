@@ -49,7 +49,7 @@ export var MESH_SELECTED = "#99C3FB";
 
 export var AREA_MESH_COLOR = {
   selected: MESH_SELECTED,
-  unselected: "#F9FAFB"
+  unselected: "#FCFCFD"
 };
 
 export var LINE_MESH_COLOR = {
