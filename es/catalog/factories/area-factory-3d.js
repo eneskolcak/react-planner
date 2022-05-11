@@ -1,19 +1,5 @@
-import {
-  Shape,
-  MeshPhongMaterial,
-  ShapeGeometry,
-  Box3,
-  TextureLoader,
-  BackSide,
-  FrontSide,
-  Object3D,
-  Mesh,
-  MeshBasicMaterial,
-  RepeatWrapping,
-  Vector2,
-  DoubleSide,
-} from "three";
-import * as SharedStyle from "../../shared-style";
+import { Shape, MeshPhongMaterial, ShapeGeometry, Box3, TextureLoader, BackSide, FrontSide, Object3D, Mesh, MeshBasicMaterial, RepeatWrapping, Vector2, DoubleSide } from 'three';
+import * as SharedStyle from '../../shared-style';
 
 /**
  * Apply a texture to a wall face
@@ -30,23 +16,14 @@ var applyTexture = function applyTexture(material, texture, length, height) {
     material.needsUpdate = true;
     material.map.wrapS = RepeatWrapping;
     material.map.wrapT = RepeatWrapping;
-    material.map.repeat.set(
-      length * texture.lengthRepeatScale,
-      height * texture.heightRepeatScale
-    );
+    material.map.repeat.set(length * texture.lengthRepeatScale, height * texture.heightRepeatScale);
 
     if (texture.normal) {
       material.normalMap = loader.load(texture.normal.uri);
-      material.normalScale = new Vector2(
-        texture.normal.normalScaleX,
-        texture.normal.normalScaleY
-      );
+      material.normalScale = new Vector2(texture.normal.normalScaleX, texture.normal.normalScaleY);
       material.normalMap.wrapS = RepeatWrapping;
       material.normalMap.wrapT = RepeatWrapping;
-      material.normalMap.repeat.set(
-        length * texture.normal.lengthRepeatScale,
-        height * texture.normal.heightRepeatScale
-      );
+      material.normalMap.repeat.set(length * texture.normal.lengthRepeatScale, height * texture.normal.heightRepeatScale);
     }
   }
 };
@@ -59,22 +36,20 @@ var assignUVs = function assignUVs(geometry) {
   geometry.computeBoundingBox();
 
   var _geometry$boundingBox = geometry.boundingBox,
-    min = _geometry$boundingBox.min,
-    max = _geometry$boundingBox.max;
+      min = _geometry$boundingBox.min,
+      max = _geometry$boundingBox.max;
+
 
   var offset = new Vector2(0 - min.x, 0 - min.y);
   var range = new Vector2(max.x - min.x, max.y - min.y);
 
   geometry.faceVertexUvs[0] = geometry.faces.map(function (face) {
+
     var v1 = geometry.vertices[face.a];
     var v2 = geometry.vertices[face.b];
     var v3 = geometry.vertices[face.c];
 
-    return [
-      new Vector2((v1.x + offset.x) / range.x, (v1.y + offset.y) / range.y),
-      new Vector2((v2.x + offset.x) / range.x, (v2.y + offset.y) / range.y),
-      new Vector2((v3.x + offset.x) / range.x, (v3.y + offset.y) / range.y),
-    ];
+    return [new Vector2((v1.x + offset.x) / range.x, (v1.y + offset.y) / range.y), new Vector2((v2.x + offset.x) / range.x, (v2.y + offset.y) / range.y), new Vector2((v3.x + offset.x) / range.x, (v3.y + offset.y) / range.y)];
   });
 
   geometry.uvsNeedUpdate = true;
@@ -87,12 +62,12 @@ export function createArea(element, layer, scene, textures) {
     vertices.push(layer.vertices.get(vertexID));
   });
 
-  var textureName = element.properties.get("texture");
-  var color = element.properties.get("patternColor");
+  var textureName = element.properties.get('texture');
+  var color = element.properties.get('patternColor');
 
   if (element.selected) {
     color = SharedStyle.AREA_MESH_COLOR.selected;
-  } else if (textureName && textureName !== "none") {
+  } else if (textureName && textureName !== 'none') {
     color = SharedStyle.AREA_MESH_COLOR.unselected;
   }
 
@@ -107,10 +82,10 @@ export function createArea(element, layer, scene, textures) {
   /* Create holes for the area */
   element.holes.forEach(function (holeID) {
     var holeCoords = [];
-    layer.getIn(["areas", holeID, "vertices"]).forEach(function (vertexID) {
-      var _layer$getIn = layer.getIn(["vertices", vertexID]),
-        x = _layer$getIn.x,
-        y = _layer$getIn.y;
+    layer.getIn(['areas', holeID, 'vertices']).forEach(function (vertexID) {
+      var _layer$getIn = layer.getIn(['vertices', vertexID]),
+          x = _layer$getIn.x,
+          y = _layer$getIn.y;
 
       holeCoords.push([x, y]);
     });
@@ -122,9 +97,7 @@ export function createArea(element, layer, scene, textures) {
   var shapeGeometry = new ShapeGeometry(shape);
   assignUVs(shapeGeometry);
 
-  var boundingBox = new Box3().setFromObject(
-    new Mesh(shapeGeometry, new MeshBasicMaterial())
-  );
+  var boundingBox = new Box3().setFromObject(new Mesh(shapeGeometry, new MeshBasicMaterial()));
 
   var width = boundingBox.max.x - boundingBox.min.x;
   var height = boundingBox.max.y - boundingBox.min.y;
@@ -136,36 +109,22 @@ export function createArea(element, layer, scene, textures) {
   var area = new Mesh(shapeGeometry, areaMaterial);
 
   area.rotation.x -= Math.PI / 2;
-  area.name = "floor";
+  area.name = 'floor';
 
   return Promise.resolve(area);
 }
 
-export function updatedArea(
-  element,
-  layer,
-  scene,
-  textures,
-  mesh,
-  oldElement,
-  differences,
-  selfDestroy,
-  selfBuild
-) {
+export function updatedArea(element, layer, scene, textures, mesh, oldElement, differences, selfDestroy, selfBuild) {
   var noPerf = function noPerf() {
-    selfDestroy();
-    return selfBuild();
+    selfDestroy();return selfBuild();
   };
-  var floor = mesh.getObjectByName("floor");
+  var floor = mesh.getObjectByName('floor');
 
-  if (differences[0] == "selected") {
-    var color = element.selected
-      ? SharedStyle.AREA_MESH_COLOR.selected
-      : element.properties.get("patternColor") ||
-        SharedStyle.AREA_MESH_COLOR.unselected;
+  if (differences[0] == 'selected') {
+    var color = element.selected ? SharedStyle.AREA_MESH_COLOR.selected : element.properties.get('patternColor') || SharedStyle.AREA_MESH_COLOR.unselected;
     floor.material.color.set(color);
-  } else if (differences[0] == "properties") {
-    if (differences[1] === "texture") {
+  } else if (differences[0] == 'properties') {
+    if (differences[1] === 'texture') {
       return noPerf();
     }
   } else return noPerf();
