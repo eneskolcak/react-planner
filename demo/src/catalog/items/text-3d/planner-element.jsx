@@ -14,7 +14,7 @@ const font = fontLoader.parse(HELVETIKER);
 const defaultFontSize = 16;
 const defaultColor = "#000000";
 
-export default {
+const a = {
   name: "text",
   prototype: "items",
 
@@ -24,6 +24,7 @@ export default {
     description: "Text",
     image: require("./img.png"),
   },
+
   properties: {
     text: {
       label: "text",
@@ -112,3 +113,4 @@ export default {
     return Promise.resolve(mesh);
   },
 };
+export default a;
