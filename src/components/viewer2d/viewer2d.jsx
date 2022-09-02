@@ -391,13 +391,17 @@ export default function Viewer2D(
           backgroundColor: "white",
           position: "absolute",
           display: "flex",
-          border: "1px solid rgba(204, 204, 204, 1)",
+          border: "1px solid #D0D5DD",
           flexDirection: "column",
+          gap: 32,
+          borderRadius: 8,
           justifyContent: "space-around",
-          top: 15,
-          padding: 15,
+          top: 4,
+          padding: 12,
+          paddingTop: 8,
+          paddingBottom: 8,
           color: "rgba(128, 128, 128, 1)",
-          right: 20,
+          right: 1,
           borderRadius: 15,
         }}
       >
@@ -409,11 +413,12 @@ export default function Viewer2D(
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              border: "1px solid #D0D5DD",
               cursor: "pointer",
               borderRadius: 5,
               backgroundColor:
                 props.tool === "auto" ? "rgba(142, 67, 231, 1)" : "white",
-              color: props.tool === "auto" ? "white" : "rgba(128, 128, 128, 1)",
+              color: props.tool === "auto" ? "white" : "black",
             }}
             onClick={() => props.onChangeTool(TOOL_NONE)}
           >
@@ -428,33 +433,65 @@ export default function Viewer2D(
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            borderRadius: 6,
+            border: "1px solid #D0D5DD",
             cursor: "pointer",
             borderRadius: 5,
+
             backgroundColor:
               props.tool === TOOL_PAN ? "rgba(142, 67, 231, 1)" : "white",
-            color: props.tool === TOOL_PAN ? "white" : "rgba(128, 128, 128, 1)",
+            color: props.tool === TOOL_PAN ? "white" : "black",
           }}
           onClick={() => props.onChangeTool(TOOL_PAN)}
         >
-          <FaRegHandPointer />
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+            <path
+              d="M10.6867 9.21156V2.31119C10.6867 1.63901 10.1907 1.09348 9.57967 1.09348C8.9686 1.09348 8.47266 1.63901 8.47266 2.31119V9.21156"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10.6875 3.81488C10.6875 3.12742 11.1834 2.56949 11.7945 2.56949C12.4056 2.56949 12.9015 3.12742 12.9015 3.81488V9.21156"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.2955 3.7995C8.2955 3.12053 7.7862 2.56949 7.15867 2.56949C6.53115 2.56949 6.02185 3.12053 6.02185 3.7995V8.30955V10.7696L4.58112 9.21073C4.12108 8.71299 3.37533 8.71299 2.91529 9.21073C2.51816 9.64042 2.45677 10.3136 2.76826 10.8188L5.42994 15.1386C6.27347 16.5072 7.69298 17.3296 9.21329 17.3296H10.5691C13.0808 17.3296 15.1164 15.1271 15.1164 12.4096V8.30955V5.43952C15.1164 4.76055 14.6071 4.2095 13.9796 4.2095C13.3521 4.2095 12.8428 4.76055 12.8428 5.43952"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </label>
         <label
           style={{
             width: "40px",
             height: "40px",
+            border: "1px solid #D0D5DD",
             display: "flex",
+            color: "black",
+            borderRadius: 6,
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
             borderRadius: 5,
+            borderColor: "#D0D5DD",
             backgroundColor:
               props.tool === TOOL_ZOOM_IN ? "rgba(142, 67, 231, 1)" : "white",
-            color:
-              props.tool === TOOL_ZOOM_IN ? "white" : "rgba(128, 128, 128, 1)",
+            color: props.tool === TOOL_ZOOM_IN ? "white" : "black",
           }}
           onClick={() => props.onChangeTool(TOOL_ZOOM_IN)}
         >
-          <FiZoomIn />
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M14 14L11.1 11.1M7.33333 5.33333V9.33333M5.33333 7.33333H9.33333M12.6667 7.33333C12.6667 10.2789 10.2789 12.6667 7.33333 12.6667C4.38781 12.6667 2 10.2789 2 7.33333C2 4.38781 4.38781 2 7.33333 2C10.2789 2 12.6667 4.38781 12.6667 7.33333Z"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </label>
         <label
           style={{
@@ -464,15 +501,25 @@ export default function Viewer2D(
             alignItems: "center",
             justifyContent: "center",
             cursor: "pointer",
+            borderRadius: 6,
+            color: "black",
             borderRadius: 5,
+            border: "1px solid #D0D5DD",
+            borderColor: "#D0D5DD",
             backgroundColor:
               props.tool === TOOL_ZOOM_OUT ? "rgba(142, 67, 231, 1)" : "white",
-            color:
-              props.tool === TOOL_ZOOM_OUT ? "white" : "rgba(128, 128, 128, 1)",
+            color: props.tool === TOOL_ZOOM_OUT ? "white" : "black",
           }}
           onClick={() => props.onChangeTool(TOOL_ZOOM_OUT)}
         >
-          <FiZoomOut />
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M14 14L11.1 11.1M5.33333 7.33333H9.33333M12.6667 7.33333C12.6667 10.2789 10.2789 12.6667 7.33333 12.6667C4.38781 12.6667 2 10.2789 2 7.33333C2 4.38781 4.38781 2 7.33333 2C10.2789 2 12.6667 4.38781 12.6667 7.33333Z"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </label>
         <label
           style={{
@@ -480,7 +527,11 @@ export default function Viewer2D(
             height: "40px",
             display: "flex",
             alignItems: "center",
+            borderColor: "#D0D5DD",
+            color: "black",
             justifyContent: "center",
+            borderRadius: 6,
+            border: "1px solid #D0D5DD",
             cursor: "pointer",
           }}
           onClick={() => {
@@ -488,7 +539,19 @@ export default function Viewer2D(
             props.onChangeValue({ ...newValue, e: 0, f: 0 });
           }}
         >
-          <MdFullscreen />
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <g clip-path="url(#clip0_4173_96306)">
+              <path
+                d="M1.5 1C1.36739 1 1.24021 1.05268 1.14645 1.14645C1.05268 1.24021 1 1.36739 1 1.5V5.5C1 5.63261 0.947322 5.75979 0.853553 5.85355C0.759785 5.94732 0.632608 6 0.5 6C0.367392 6 0.240215 5.94732 0.146447 5.85355C0.0526784 5.75979 0 5.63261 0 5.5V1.5C0 1.10218 0.158035 0.720644 0.43934 0.43934C0.720644 0.158035 1.10218 0 1.5 0L5.5 0C5.63261 0 5.75979 0.0526784 5.85355 0.146447C5.94732 0.240215 6 0.367392 6 0.5C6 0.632608 5.94732 0.759785 5.85355 0.853553C5.75979 0.947322 5.63261 1 5.5 1H1.5ZM10 0.5C10 0.367392 10.0527 0.240215 10.1464 0.146447C10.2402 0.0526784 10.3674 0 10.5 0L14.5 0C14.8978 0 15.2794 0.158035 15.5607 0.43934C15.842 0.720644 16 1.10218 16 1.5V5.5C16 5.63261 15.9473 5.75979 15.8536 5.85355C15.7598 5.94732 15.6326 6 15.5 6C15.3674 6 15.2402 5.94732 15.1464 5.85355C15.0527 5.75979 15 5.63261 15 5.5V1.5C15 1.36739 14.9473 1.24021 14.8536 1.14645C14.7598 1.05268 14.6326 1 14.5 1H10.5C10.3674 1 10.2402 0.947322 10.1464 0.853553C10.0527 0.759785 10 0.632608 10 0.5ZM0.5 10C0.632608 10 0.759785 10.0527 0.853553 10.1464C0.947322 10.2402 1 10.3674 1 10.5V14.5C1 14.6326 1.05268 14.7598 1.14645 14.8536C1.24021 14.9473 1.36739 15 1.5 15H5.5C5.63261 15 5.75979 15.0527 5.85355 15.1464C5.94732 15.2402 6 15.3674 6 15.5C6 15.6326 5.94732 15.7598 5.85355 15.8536C5.75979 15.9473 5.63261 16 5.5 16H1.5C1.10218 16 0.720644 15.842 0.43934 15.5607C0.158035 15.2794 0 14.8978 0 14.5L0 10.5C0 10.3674 0.0526784 10.2402 0.146447 10.1464C0.240215 10.0527 0.367392 10 0.5 10ZM15.5 10C15.6326 10 15.7598 10.0527 15.8536 10.1464C15.9473 10.2402 16 10.3674 16 10.5V14.5C16 14.8978 15.842 15.2794 15.5607 15.5607C15.2794 15.842 14.8978 16 14.5 16H10.5C10.3674 16 10.2402 15.9473 10.1464 15.8536C10.0527 15.7598 10 15.6326 10 15.5C10 15.3674 10.0527 15.2402 10.1464 15.1464C10.2402 15.0527 10.3674 15 10.5 15H14.5C14.6326 15 14.7598 14.9473 14.8536 14.8536C14.9473 14.7598 15 14.6326 15 14.5V10.5C15 10.3674 15.0527 10.2402 15.1464 10.1464C15.2402 10.0527 15.3674 10 15.5 10Z"
+                fill="currentColor"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_4173_96306">
+                <rect width="16" height="16" fill="currentColor" />
+              </clipPath>
+            </defs>
+          </svg>
         </label>
       </div>
     );

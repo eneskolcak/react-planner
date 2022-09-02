@@ -86,7 +86,7 @@ ReactDOM.render(
           catalog={MyCatalog}
           width={width}
           height={height}
-          viewOnly={true}
+          viewOnly={false}
           onClickOnItem={(id) => console.log(id)}
           plugins={plugins}
           toolbarButtons={toolbarButtons}
