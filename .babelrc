@@ -6,7 +6,7 @@
       "presets": ["env", "react"]
     },
     "es": {
-      "presets": [["env", { "modules": false }], "react"]
+      "presets": [["env", { "modules": true }], "react"]
     }
   }
 }
