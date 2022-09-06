@@ -635,10 +635,10 @@ export default function Viewer2D(
         background={"#fff"}
         miniatureBackground={"#fff"}
         onMouseMove={onMouseMove}
-        customToolbar={customToolBar}
+        // customToolbar={customToolBar}
         onMouseUp={onMouseUp}
         miniaturePosition="none"
-        toolbarPosition="top"
+        toolbarPosition="none"
       >
         <svg width={scene.width} height={scene.height}>
           <defs>
