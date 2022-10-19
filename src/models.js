@@ -41,7 +41,6 @@ export const DefaultGrids = new Map({
   })
 });
 
-
 export class ElementsSet extends Record({
   vertices: new List(),
   lines: new List(),
@@ -61,16 +60,16 @@ export class ElementsSet extends Record({
 }
 
 const sharedAttributes =
-{
-  id: '',
-  type: '',
-  prototype: '',
-  name: '',
-  misc: new Map(),
-  selected: false,
-  properties: new Map(),
-  visible: true
-};
+  {
+    id: '',
+    type: '',
+    prototype: '',
+    name: '',
+    misc: new Map(),
+    selected: false,
+    properties: new Map(),
+    visible: true
+  };
 
 export class Vertex extends Record({
   ...sharedAttributes,
@@ -219,7 +218,11 @@ export class Scene extends Record({
       selectedLayer: layers.first().id,
       groups: safeLoadMapList(json.groups || {}, Group),
       meta: json.meta ? fromJS(json.meta) : new Map(),
-      guides: json.guides ? fromJS(json.guides) : new Map({ horizontal: new Map(), vertical: new Map(), circular: new Map() })
+      guides: json.guides ? fromJS(json.guides) : new Map({
+        horizontal: new Map(),
+        vertical: new Map(),
+        circular: new Map()
+      })
     });
   }
 }
@@ -285,12 +288,12 @@ export class HistoryStructure extends Record({
   list: new List(),
   first: null,
   last: null
-}, 'HistoryStructure' ){
-  constructor( json = {} ){
+}, 'HistoryStructure') {
+  constructor(json = {}) {
     super({
-      list: fromJS( json.list || [] ),
-      first: new Scene( json.scene ),
-      last: new Scene( json.last || json.scene )
+      list: fromJS(json.list || []),
+      first: new Scene(json.scene),
+      last: new Scene(json.last || json.scene)
     });
   }
 }
